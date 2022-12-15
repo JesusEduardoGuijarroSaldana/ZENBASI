@@ -1,3 +1,26 @@
+<?php
+    include '../../TODO/conexion.php';
+    $selectTutor = "SELECT CONCAT(Nombre,' ',Ap_Paterno,' ',Ap_Materno) AS nombreTutor FROM tutor"; 
+    $resultTutor = mysqli_query($conexion, $selectTutor);
+    $selectAlumno = "SELECT  CONCAT(Nombre,' ',Ap_Paterno,' ',Ap_Materno) AS nombreAlumno FROM alumno";
+    $resultAlumno = mysqli_query($conexion, $selectAlumno);
+    $message = '';
+    if(isset($_POST['submit'])){
+        $tutor  = $_POST['tutor']; // aquí guardo Jesús Guijarro Lira        
+        //$idTutor = "SELECT idTutor FROM tutor WHERE CONCAT(Nombre,' ',Ap_Paterno,' ',Ap_Materno)=".$tutor; 
+        $alumno = $_POST['alumno']; // aquí guardo Pedro Games Gamer 
+        //$idAlumno = "SELECT idAlumno FROM alumno WHERE CONCAT(Nombre,' ',Ap_Paterno,' ',Ap_Materno)=".$alumno;
+        //insertamos los datos a la bd
+        $insert = 'INSERT INTO prueba(tutor,alumno) VALUES("'.$tutor.'","'.$alumno.'")'; 
+        if(mysqli_query($conexion, $insert)){
+            $message = "Todo bien pa";
+        }else{
+            $message = "ERROR con $insert.".mysqi_error($conexion);
+        }
+        // cerramos la conexión
+        mysqli_close($conexion);
+    }
+?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -177,7 +200,8 @@
             <!-- Basic Examples -->
             <div class="card card-default">
               <div class="card-header">
-                <h1>Tutores</h1>                
+                <h1>Tutores</h1>
+                
               </div>
               <div class="card-body">
                 <form>
@@ -185,8 +209,11 @@
                     <button type="button" class="mb-1 btn btn-primary d-inline-block mr-8" data-toggle="modal" data-target="#nuevoTutor">
                       <i class=" mdi mdi-plus mr-1"></i>
                       Nuevo tutor 
-                    </button>                    
-                    <a href="../../TODO/phppropios/uniones.php">Unir Tutor a Alumno.</a>
+                    </button>
+                    <button type="button" class="mb-1 btn btn-primary d-inline-block mr-8" data-toggle="modal" data-target="#modalAñadirAlumno">
+                      <i class=" mdi mdi-plus mr-1"></i>
+                      Unir Tutor a Alumno
+                    </button>
                     <!-- Buscador que no funciona -->
                     <!-- ====================================
                     ——— <input type="text" class="form-control col-4 d-inline-block" aria-label="Text input with dropdown button" placeholder="Buscar tutor...">
@@ -204,19 +231,8 @@
                       <th>Ap. Paterno</th>
                       <th>Ap. materno</th>
                       <th>Telefono</th>
-                      <th>Correo</th>                      
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>                                
-                  </tbody>
-                </table>
-                <h1>Uniones Tutor-Alumno</h1>
-                <table id="unionTutorAlumno" class="table table-hover table-product" style="width:100%">
-                  <thead>
-                    <tr>
-                      <th>Tutor</th>
-                      <th>Alumno</th>
+                      <th>Correo</th>
+                      <th>Hijo(s)</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
@@ -275,29 +291,43 @@
            <div class="modal-content">
              <div class="modal-header">
                <h5 class="modal-title" id="exampleModalFormTitle">Asignar hijo(s)</h5>
+               
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                  <span aria-hidden="true">&times;</span>
                </button>
              </div>
              <div class="modal-body">               
               <!---------------------------------- AÑADIR HIJO "SUBMODAL" ------------------------------------------->
-                <label>Tutor:</label>                
-              <select name="select">
-                  <option value="value1">Value 1</option>
-                  <option value="value2" selected>Value 2</option>
-                  <option value="value3">Value 3</option>
-              </select>
-              <hr>
-                <label>Alumno:</label>
-                <select name="select">
-                  <option value="value1">Value 1</option>
-                  <option value="value2" selected>Value 2</option>
-                  <option value="value3">Value 3</option>
-                </select> 
+              <form action="tutoresAdmin.php" method="POST">
+                <div class="form-group">  
+                <label>Tutor:</label>
+                </div>
+                  <h5 class="text-succes text-center" id="message"><?php=$message;?></h5>  
+                <div class="form-group">              
+                  <select name="tutor">
+                      <option value="value1">Seleccione un Tutor</option>
+                      <?php foreach($resultTutor as $key => $value){ ?>
+                        <option value="<?=$value['nombreTutor']; ?>"><?=$value['nombreTutor']; ?></option>
+                        <?php } ?>
+                  </select>
+                </div>
+                <hr>
+                <div class="form-group">  
+                  <label>Alumno:</label>
+                </div>
+                <div class="form-group">  
+                  <select name="alumno">
+                      <option value="value1">Seleccione un Alumno</option>
+                      <?php foreach($resultAlumno as $key => $value){ ?>
+                        <option value="<?=$value['nombreAlumno']; ?>"><?=$value['nombreAlumno']; ?></option>
+                        <?php } ?>
+                  </select>
+                </div> 
+               </form>                
              </div>
              <div class="modal-footer">
                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Cancelar</button>
-               <button type="button" class="btn btn-primary btn-pill" data-dismiss="modal">Unir</button>
+               <button type="submit" name="submit" id="submit" class="btn btn-primary btn-pill" data-dismiss="modal">Unir</button>
              </div>
            </div>
          </div>
@@ -431,13 +461,7 @@ aria-hidden="true">
                         actionReadTutor();
                       });                                                               
                     </script>
-                    <script> 
-                      $(function(){
-                        $("#unionTutorAlumno").DataTable({});
-                        actionReadUnionAlumnoTutor  ();
-                      });                                                               
-                    </script>   
-                                   
+
                     <script src="../../TODO/jspropios/crud-tutoresAdmin.js"></script>
                     <script src="../../TODO/jspropios/crud-alumnosAdmin.js"></script>
 

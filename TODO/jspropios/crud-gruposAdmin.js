@@ -51,7 +51,7 @@ function actionCreate(){
             let tabla = $("#grupos").DataTable();
             let botones = '<button type="button" class="btn btn-warning btn-sm mr-3" data-toggle="modal" data-target="#editarGrupo"><i class=" mdi mdi-pencil mr-1"></i>Editar</button>';
             botones += '<button type="button" class="btn btn-danger mr-3 btn-sm" data-toggle="modal" data-target="#modalEliminarGrupo" onclick="identificarEliminar('+miObjetoJSON.id+');><i class=" mdi mdi-trash-can mr-1"></i>Eliminar</button>';
-            botones += '<button type="button" class="btn btn-primary btn-sm mr-3" data-toggle="modal" data-target="#agregarAlumno"><i class="mdi mdi-account-plus mr-1"></i>Anadir Alumno</button>';
+            botones += '<button type="button" class="btn btn-primary btn-sm mr-3" data-toggle="modal" data-target="#agregarAlumno"><i class="mdi mdi-account-plus mr-1"></i>Añadir Alumno</button>';
             botones += '<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#agregarMateria"><i class=" mdi mdi-book-plus mr-1"></i>Anadir materia</button>';
             tabla.row.add([nivelAcademicoGrupo, gradoGrupo, grupoLetra, botones]).draw().node().id="renglon_"+miObjetoJSON.id;
         }

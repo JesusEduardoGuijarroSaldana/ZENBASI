@@ -1,4 +1,5 @@
 let idEliminarAlumno = 0;
+let idAlumnoUnir = 0;
 function actionCreateAlumno(){
     let nombreAlumno    = document.getElementById("nombreAlumno").value;
     let apPaternoAlumno       = document.getElementById("apPaternoAlumno").value;
@@ -92,24 +93,43 @@ function identificarEliminarAlumno(id){
     //alert(id);
 }
 ////////////////////////////////////////////
-function actionReadAlumnosAgregar(){
-    $.ajax({
-        method: "POST",
-        url: "../../TODO/phppropios/crud-alumnosAdmin.php",
-        data: {
-            accion: "read-AlumnosAgregar"
-        },
-        success: function(respuesta) {
-            let miObjetoJSON = JSON.parse(respuesta);
-            //alert("hola");
-            if(miObjetoJSON.estado==1){
-                let tabla = $("#alumnosAgregar").DataTable();
-                miObjetoJSON.alumnosAgregar.forEach(Nombre => {
-                    let boton = '<button type="button" class="btn btn-primary btn-pill btn-sm" >Agregar</button>';
-                    // Nombre, ApPaterno, ApMaterno, CURP y botón
-                    tabla.row.add([Nombre.Nombre, Nombre.Ap_Paterno, Nombre.Ap_Materno, Nombre.CURP, boton]).draw().node().id="renglon_"+Nombre.idAlumno;
-                })
-            }
-        }
-      });
-}
+// function actionReadAlumnosAgregar(){
+//     $.ajax({
+//         method: "POST",
+//         url: "../../TODO/phppropios/crud-alumnosAdmin.php",
+//         data: {
+//             accion: "read-AlumnosAgregar"
+//         },
+//         success: function(respuesta) {
+//             let miObjetoJSON = JSON.parse(respuesta);
+//             //alert("hola");
+//             if(miObjetoJSON.estado==1){
+//                 let tabla = $("#alumnosAgregar").DataTable();
+//                 miObjetoJSON.alumnosAgregar.forEach(Nombre => {
+//                     let boton = '<button type="button" class="btn btn-primary btn-pill btn-sm onclick="identificarAlumnoAUnir('+Nombre.idAlumno+');" >Agregar</button>';
+//                     // Nombre, ApPaterno, ApMaterno, CURP y botón
+//                     tabla.row.add([Nombre.Nombre, Nombre.Ap_Paterno, Nombre.Ap_Materno, Nombre.CURP, boton]).draw().node().id="renglon_"+Nombre.idAlumno;
+//                 })
+//             }
+//         }
+//       });
+// }
+//////////////
+// function identificarAlumnoAUnir(idAlumnoAUnir){
+//     idAlumnoUnir = idAlumnoAUnir;
+//     alert(idAlumnoAUnir);
+// }
+// function mandarIdUnionAlumno(){
+//     $.ajax({        
+//         url: "../../TODO/phppropios/unionTutorAlumnoAdmin.php",
+//         type: "POST",
+//         data: {
+//             idAlumnoAUnir: idAlumnoUnir,
+//             accion: "saveIdTutor"          
+//         },
+//         success: function(respuesta) {            
+//             // do something
+//             alert(idAlumnoUnir);
+//         }
+//       }); 
+// }

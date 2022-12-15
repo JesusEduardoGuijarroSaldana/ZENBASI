@@ -20,6 +20,10 @@
             accionReadByIdPhp($conexion);
             break;
         }
+        case "readUnionAlumnoTutor":{
+            accionReadUnionAlumnoTutor($conexion);
+            break;
+        }
         default:{
             accionErrorPhp();
             break;
@@ -70,7 +74,35 @@
                 $tutor["Ap_Materno"] = $renglonTutor["Ap_Materno"];
                 $tutor["telefono"] = $renglonTutor["telefono"];
                 $tutor["Email"] = $renglonTutor["Email"];
+                //$tutor["hijos"] = $renglonTutor['Jesus'];
                 array_push($respuesta["tutores"],$tutor);
+            }
+        }
+        else{
+            $respuesta["estado"] = 0;
+            $respuesta["mensaje"] = "Resgistros no encontrados";        
+        }
+        echo json_encode($respuesta);
+        mysqli_close($conexion);
+    }
+    function accionReadUnionAlumnoTutor($conexion){
+        //Diseñamos la consulta
+        $QueryRead = "SELECT * FROM prueba";
+        //Ejecutamos la consulta
+        $ResultadoRead = mysqli_query($conexion, $QueryRead);
+        //Obtenemos el número de registros
+        $numeroRegistros = mysqli_num_rows($ResultadoRead);
+        //Preguntamos si hya registros o no
+        if($numeroRegistros > 0){
+            $respuesta["estado"] = 1;
+            $respuesta["mensaje"] = "Registros encontrados";
+            $respuesta["unionTutorAlumno"] = array();
+            while($renglonunionTutorAlumno= mysqli_fetch_assoc($ResultadoRead)){
+                $unionTutorAlumno = array();
+                $unionTutorAlumno["idUnion"] = $renglonunionTutorAlumno["idUnion"];
+                $unionTutorAlumno["tutor"] = $renglonunionTutorAlumno["tutor"];
+                $unionTutorAlumno["alumno"] = $renglonunionTutorAlumno["alumno"];                             
+                array_push($respuesta["unionTutorAlumno"],$unionTutorAlumno);
             }
         }
         else{

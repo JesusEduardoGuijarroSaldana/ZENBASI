@@ -24,10 +24,10 @@
             accionReadByIdPhp($conexion);
             break;
         }
-        case "read-AlumnosAgregar":{
-            accionReadAlumnosAgregar($conexion);
-            break;
-        }
+        // case "read-AlumnosAgregar":{
+        //     accionReadAlumnosAgregar($conexion);
+        //     break;
+        // }
         default:{
             accionErrorPhp();
             break;
@@ -103,33 +103,33 @@
         mysqli_close($conexion);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////
-    function accionReadAlumnosAgregar($conexion){
-        // Diseñamos la consulta 
-        $QueryReadAlumnosAgregar = "SELECT * FROM alumno";
-        // Ejecutamos la consulta
-        $ResultadoReadAlumnosAgregar = mysqli_query($conexion, $QueryReadAlumnosAgregar);
-        // Obtenemos el número de registros
-        $numeroRegistros = mysqli_num_rows($ResultadoReadAlumnosAgregar);
-        // Preguntamos si hay registros o no
-        if($numeroRegistros > 0){
-            $respuesta["estado"] = 1;
-            $respuesta["mensaje"] = "Registros encontrados";
-            $respuesta["alumnosAgregar"] = array();
-            while($renglonAlumnoAgregar = mysqli_fetch_assoc($ResultadoReadAlumnosAgregar)){
-                $alumnoAgregar = array();
-                // Nombre, ApPaterno, ApMaterno, CURP 
-                $alumnoAgregar["idAlumno"]      = $renglonAlumnoAgregar["idAlumno"];
-                $alumnoAgregar["Nombre"]        = $renglonAlumnoAgregar["Nombre"];
-                $alumnoAgregar["Ap_Paterno"]    = $renglonAlumnoAgregar["Ap_Paterno"];
-                $alumnoAgregar["Ap_Materno"]    = $renglonAlumnoAgregar["Ap_Materno"];
-                $alumnoAgregar["CURP"]          = $renglonAlumnoAgregar["CURP"];
-                array_push($respuesta["alumnosAgregar"], $alumnoAgregar);
-            }
-        }else{
-            $respuesta["estado"] = 0;
-            $respuesta["mensaje"] = "Resgistros no encontrados";        
-        }
-        echo json_encode($respuesta);
-        mysqli_close($conexion);
-    }
+    // function accionReadAlumnosAgregar($conexion){
+    //     // Diseñamos la consulta 
+    //     $QueryReadAlumnosAgregar = "SELECT * FROM alumno";
+    //     // Ejecutamos la consulta
+    //     $ResultadoReadAlumnosAgregar = mysqli_query($conexion, $QueryReadAlumnosAgregar);
+    //     // Obtenemos el número de registros
+    //     $numeroRegistros = mysqli_num_rows($ResultadoReadAlumnosAgregar);
+    //     // Preguntamos si hay registros o no
+    //     if($numeroRegistros > 0){
+    //         $respuesta["estado"] = 1;
+    //         $respuesta["mensaje"] = "Registros encontrados";
+    //         $respuesta["alumnosAgregar"] = array();
+    //         while($renglonAlumnoAgregar = mysqli_fetch_assoc($ResultadoReadAlumnosAgregar)){
+    //             $alumnoAgregar = array();
+    //             // Nombre, ApPaterno, ApMaterno, CURP 
+    //             $alumnoAgregar["idAlumno"]      = $renglonAlumnoAgregar["idAlumno"];
+    //             $alumnoAgregar["Nombre"]        = $renglonAlumnoAgregar["Nombre"];
+    //             $alumnoAgregar["Ap_Paterno"]    = $renglonAlumnoAgregar["Ap_Paterno"];
+    //             $alumnoAgregar["Ap_Materno"]    = $renglonAlumnoAgregar["Ap_Materno"];
+    //             $alumnoAgregar["CURP"]          = $renglonAlumnoAgregar["CURP"];
+    //             array_push($respuesta["alumnosAgregar"], $alumnoAgregar);
+    //         }
+    //     }else{
+    //         $respuesta["estado"] = 0;
+    //         $respuesta["mensaje"] = "Resgistros no encontrados";        
+    //     }
+    //     echo json_encode($respuesta);
+    //     mysqli_close($conexion);
+    // }
 ?>
