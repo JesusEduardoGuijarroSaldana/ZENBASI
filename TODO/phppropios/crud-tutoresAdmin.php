@@ -86,13 +86,16 @@
         mysqli_close($conexion);
     }
     function accionReadUnionAlumnoTutor($conexion){
+        //$idTutor = $_POST['tutor'];
+        //$idAlumno = $_POST['alumno'];
         //Diseñamos la consulta
-        $QueryRead = "SELECT * FROM prueba";
+        //$QueryRead = "SELECT CONCAT(tt.Nombre,' ',tt.Ap_Paterno,' ',tt.Ap_Materno) AS Tutor, CONCAT(al.Nombre,' ',al.Ap_Paterno,' ',al.Ap_Materno) AS Alumno FROM tutor_alumno AS ttAl JOIN tutor AS tt ON(ttAl.Tutor_idTutor = tt.idTutor) JOIN alumno AS al ON(ttAl.Alumno_idAlumno = al.idAlumno) WHERE (tt.idTutor = tutor AND al.idAlumno= alumno);";        
+        $QueryRead = "SELECT * FROM tutor_alumno";
         //Ejecutamos la consulta
         $ResultadoRead = mysqli_query($conexion, $QueryRead);
         //Obtenemos el número de registros
         $numeroRegistros = mysqli_num_rows($ResultadoRead);
-        //Preguntamos si hya registros o no
+        //Preguntamos si hay registros o no
         if($numeroRegistros > 0){
             $respuesta["estado"] = 1;
             $respuesta["mensaje"] = "Registros encontrados";
@@ -100,8 +103,8 @@
             while($renglonunionTutorAlumno= mysqli_fetch_assoc($ResultadoRead)){
                 $unionTutorAlumno = array();
                 $unionTutorAlumno["idUnion"] = $renglonunionTutorAlumno["idUnion"];
-                $unionTutorAlumno["tutor"] = $renglonunionTutorAlumno["tutor"];
-                $unionTutorAlumno["alumno"] = $renglonunionTutorAlumno["alumno"];                             
+                $unionTutorAlumno["tutor"] = $renglonunionTutorAlumno["Tutor_idTutor"];
+                $unionTutorAlumno["alumno"] = $renglonunionTutorAlumno["Alumno_idAlumno"];                             
                 array_push($respuesta["unionTutorAlumno"],$unionTutorAlumno);
             }
         }

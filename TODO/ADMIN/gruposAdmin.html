@@ -198,8 +198,6 @@
                     ===================================== -->
                   </div>
                 </form>
-
-
                 <table id="grupos" class="table table-hover table-product" style="width:100%">
                   <thead>
                     <tr>
@@ -210,6 +208,18 @@
                     </tr>
                   </thead>
                   <tbody>                    
+                  </tbody>
+                </table>
+                <h3 class="mb-3">Materias Agregadas:</h3>
+                <table id="materiasAgregadas" class="table  table-product" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Grupo</th>
+                      <th>Materia</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>            
                   </tbody>
                 </table>
               </div>
@@ -475,107 +485,33 @@
 
 
   <!-- anadir materias Modal -->
-  <div class="modal fade" id="agregarMateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalFormTitle">Agregar materias</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
- 
-        <form>
-         <div class="form-group">
-           <label for="buscarHijos" class="ml-2">Agregar materias: </label>
-           <input type="text" class="form-control col-6 d-inline-block ml-3" aria-label="Text input with dropdown button" placeholder="Buscar materias...">
-           <button type="button" class="mb-1 btn btn-primary ">
-             <i class=" mdi mdi-magnify mr-1"></i>
-             
-           </button>
-         </div>
-       </form>
- 
-       <table id="materias" class="table  table-product" style="width:100%">
-         <thead>
-           <tr>
-             <th>Materia</th>
-             <th>Nivel escolar</th>
-             <th>Acciones</th>
-           </tr>
-         </thead>
-         <tbody>
-   
-           <tr>
-            <th>Materia</th>
-            <th>Nivel escolar</th>
-             <td>
-               <button type="button" class="btn btn-primary btn-pill btn-sm" >Agregar</button>
-             </td>
- 
-           </tr>
- 
-           <tr>
-            <th>Materia</th>
-            <th>Nivel escolar</th>
-             <td>
-               <button type="button" class="btn btn-primary btn-pill btn-sm" >Agregar</button>
-             </td>
- 
-           </tr>
-   
-         </tbody>
-       </table>
-       
-       <h3 class="mb-3">Materias Agregadas:</h3>
-       <table id="materiasAgregadas" class="table  table-product" style="width:100%">
-         <thead>
-           <tr>
-            <th>Materia</th>
-            <th>Nivel escolar</th>
-             <th>Acciones</th>
-           </tr>
-         </thead>
-         <tbody>
-   
-           <tr>
-            <th>Materia</th>
-            <th>Nivel escolar</th>
-             <td>
-               <button type="button" class="btn btn-danger btn-pill btn-sm" >Eliminar</button>
-             </td>
- 
-           </tr>
- 
-           <tr>
-            <th>Materia</th>
-            <th>Nivel escolar</th>
-             <td>
-               <button type="button" class="btn btn-danger btn-pill btn-sm" >Eliminar</button>
-             </td>
- 
-           </tr>
-   
-         </tbody>
-       </table>
-       
- 
- 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary btn-pill" >Guardar</button>
+  <div class="modal fade" id="agregarMateria" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalFormTitle">Agregar materias</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">        
+          <form>
+            <div class="form-group">
+              <label for="buscarHijos" class="ml-2">Agregar materias: </label>
+              <di class="col-sm-6">
+                <select class="form-control" id="selectMaterias" >
+                </select>   
+              </di>
+            </div>
+          </form>                 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary btn-pill" data-dismiss="modal" onclick="asignarUnion();">Guardar</button>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  
- 
-       
- 
           <!-- Footer -->
           <footer class="footer mt-auto">
             <div class="copyright bg-white">
@@ -583,13 +519,7 @@
             </div>
           </footer>
       </div>
-    </div>
-    
-                    
-
-
-
-    
+    </div>                            
                     <script src="../../theme/plugins/jquery/jquery.min.js"></script>
                     <script src="../../theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
                     <script src="../../theme/plugins/simplebar/simplebar.min.js"></script>
@@ -615,10 +545,6 @@
                     <script src="../../theme/js/chart.js"></script>
                     <script src="../../theme/js/map.js"></script>
                     <script src="../../theme/js/custom.js"></script>
-
-                    
-
-
                     <!--  -->
                     <script> 
                       $(function(){
@@ -626,7 +552,13 @@
                         actionRead();
                       });                    
                     </script>
-
+                    <script> 
+                      $(function(){
+                        $("#grupos").DataTable({});
+                        actionReadUnionGrupoMateria();
+                      });                    
+                    </script>                     
+                    
                     <script src="../../TODO/jspropios/crud-gruposAdmin.js"></script>
 
   </body>
