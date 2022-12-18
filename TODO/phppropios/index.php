@@ -7,18 +7,15 @@ include_once 'database.php';
     if(isset($_POST['submit']))
     {
         $name       =   $_POST['name'];
-        $country    =   $_POST['country'];
-    
+        $country    =   $_POST['country'];    
         // Attempt insert query execution
         $insert = "INSERT INTO tbl_insert (name, country) VALUES ('$name', '$country')";
         if(mysqli_query($connection, $insert)){
             $message =  "Records added successfully.";
-        } 
-            else
+        }else
         {
             $message = "ERROR: Could not able to execute $insert. " . mysqli_error($connection);
-        }
-        
+        }        
         // Close connection
         mysqli_close($connection);
     } 
