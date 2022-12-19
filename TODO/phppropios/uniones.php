@@ -18,7 +18,7 @@ include '../../TODO/conexion.php'; // Union Tutor - Alumno
         // Attempt insert query execution
         $insert = "INSERT INTO tutor_alumno (Tutor_idTutor ,Alumno_idAlumno) VALUES ('$tutor', '$alumno')";
         if(mysqli_query($conexion, $insert)){
-            $message = "Records added successfully.";
+            $message = "Se realizó la unión correctamente.";
         }else
             $message = "ERROR: Could not able to execute $insert. " . mysqli_error($conexion);
         // Close connection
@@ -66,8 +66,8 @@ include '../../TODO/conexion.php'; // Union Tutor - Alumno
                 <div class="container">
                   <div class="row">
                     <div class="col"><button type="submit" name="submit" class="col-6 btn btn-primary btn-sm float-left">Submit</button></div>
-                    <div class="col">                        
-                        <a class="col-6 float-right" href="../../TODO/ADMIN/tutoresAdmin.html">Volver</a>                
+                    <div class="col">                                                 
+                        <button type="button" class="col-6 btn btn-danger btn-sm float-right" role="link" onclick="window.location='../../TODO/ADMIN/tutoresAdmin.html'">Volver</button>
                   </div>                    
               </form>
                   </div>

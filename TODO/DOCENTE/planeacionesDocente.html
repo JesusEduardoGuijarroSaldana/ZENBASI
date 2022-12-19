@@ -185,13 +185,10 @@
                     <form class="mb-3">
                       <label class="text-dark">Materia:</label>
                       <select class="custom-select my-1 mr-sm-2 col-4 ml-3 mr-5" id="selectMateria">
-                        <option value="a">1 A Artes</option>
-                        <option value="1"> 2 BHistoria reiss</option>
-                        <option value="2">3 B Ciencias </option>
-                        <option value="3">4 D Matematicas</option>
+                        
                       </select>
 
-                      <button type="button" class="mb-3 btn btn-primary mr-5  d-inline-block ml-8" data-toggle="modal" data-target="#modalPlaneaciones">
+                      <button type="button" class="mb-3 btn btn-primary mr-5  d-inline-block ml-8" data-toggle="modal" data-target="#modalPlaneaciones" onclick="nuevaPlaneacion();">
                         <i class=" mdi mdi-plus mr-1"></i>
                         Nueva
                       </button>
@@ -416,11 +413,7 @@ aria-hidden="true">
             <div class="copyright bg-white">
              
             </div>
-            <script>
-                var d = new Date();
-                var year = d.getFullYear();
-                document.getElementById("copy-year").innerHTML = year;
-            </script>
+            
           </footer>
 
                     <script src="../../theme/plugins/jquery/jquery.min.js"></script>
@@ -434,7 +427,7 @@ aria-hidden="true">
 
                     <script src="../../theme/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
                     
-                    
+                    <script src="../jspropios/docentes-planeaciones.js"></script>
                     
                     <script src="../../theme/plugins/apexcharts/apexcharts.js"></script>
                     
@@ -444,7 +437,9 @@ aria-hidden="true">
                     <script src="../../theme/js/map.js"></script>
                     <script src="../../theme/js/custom.js"></script>
 
-                    
+                    <script src="../jspropios/docentes-planeaciones.js"></script>
+
+                    <script>readGruposDocente();</script>
 
 
                     <!--  -->

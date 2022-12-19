@@ -10,7 +10,7 @@ include '../../TODO/conexion.php'; // Unión Grupo - Materia
         $materia = $_POST['materia'];
         $insert = "UPDATE materia SET Grupo_idGrupo = '$grupo' WHERE idMateria=".$materia;
         if(mysqli_query($conexion, $insert)){
-            $message = "Records added successfully.";
+            $message = "Se realizó la unión correctamente.";
         }else
             $message = "ERROR: Could not able to execute $insert. " . mysqli_error($conexion);
         // Close connection
@@ -59,8 +59,8 @@ include '../../TODO/conexion.php'; // Unión Grupo - Materia
                 <div class="container">
                   <div class="row">
                     <div class="col"><button type="submit" name="submit" class="col-6 btn btn-primary btn-sm float-left">Submit</button></div>
-                    <div class="col">                        
-                        <a class="col-6 float-right" href="../../TODO/ADMIN/gruposAdmin.html">Volver</a>                
+                    <div class="col">                                                           
+                        <button type="button" class="col-6 btn btn-danger btn-sm float-right" role="link" onclick="window.location='../../TODO/ADMIN/gruposAdmin.html'">Volver</button>
                   </div>                    
               </form>
                   </div>

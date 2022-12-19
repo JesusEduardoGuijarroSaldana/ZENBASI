@@ -154,31 +154,31 @@
         echo json_encode($respuesta);    
         mysqli_close($conexion);
     }
-    function accionReadUnionGrupoMateriaPhp($conexion){
-        // diseñamos la consulta
-        $QueryRead = "SELECT * FROM grupo_materia";
-        // ejecutamos la consulta
-        $ResultadoRead = mysqli_query($conexion, $QueryRead);
-        // Obtenemos el número de registros
-        $numeroRegistros = mysqli_num_rows($ResultadoRead);
-        // Preguntamos si hay registros o no
-        if($numeroRegistros > 0){
-            $respuesta["estado"] = 1;
-            $respuesta["mensaje"] = "Registros encontrados";
-            $respuesta["unionGrupoMateria"] = array();
-            while($renglonunionGrupoMateria= mysqli_fetch_assoc($ResultadoRead)){
-                $unionGrupoMateria = array();
-                $unionGrupoMateria["idUnion"] = $renglonunionGrupoMateria["idUnion"];
-                $unionGrupoMateria["grupo"] = $renglonunionGrupoMateria["grupo"];
-                $unionGrupoMateria["materia"] = $renglonunionGrupoMateria["materia"];                             
-                array_push($respuesta["unionGrupoMateria"],$unionGrupoMateria);
-            }
-        }
-        else{
-            $respuesta["estado"] = 0;
-            $respuesta["mensaje"] = "Resgistros no encontrados";        
-        }
-        echo json_encode($respuesta);
-        mysqli_close($conexion);
-    }
+    // function accionReadUnionGrupoMateriaPhp($conexion){
+    //     // diseñamos la consulta
+    //     $QueryRead = "SELECT * FROM grupo_materia";
+    //     // ejecutamos la consulta
+    //     $ResultadoRead = mysqli_query($conexion, $QueryRead);
+    //     // Obtenemos el número de registros
+    //     $numeroRegistros = mysqli_num_rows($ResultadoRead);
+    //     // Preguntamos si hay registros o no
+    //     if($numeroRegistros > 0){
+    //         $respuesta["estado"] = 1;
+    //         $respuesta["mensaje"] = "Registros encontrados";
+    //         $respuesta["unionGrupoMateria"] = array();
+    //         while($renglonunionGrupoMateria= mysqli_fetch_assoc($ResultadoRead)){
+    //             $unionGrupoMateria = array();
+    //             $unionGrupoMateria["idUnion"] = $renglonunionGrupoMateria["idUnion"];
+    //             $unionGrupoMateria["grupo"] = $renglonunionGrupoMateria["grupo"];
+    //             $unionGrupoMateria["materia"] = $renglonunionGrupoMateria["materia"];                             
+    //             array_push($respuesta["unionGrupoMateria"],$unionGrupoMateria);
+    //         }
+    //     }
+    //     else{
+    //         $respuesta["estado"] = 0;
+    //         $respuesta["mensaje"] = "Resgistros no encontrados";        
+    //     }
+    //     echo json_encode($respuesta);
+    //     mysqli_close($conexion);
+    // }
 ?>

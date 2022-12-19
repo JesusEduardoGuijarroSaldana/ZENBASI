@@ -160,39 +160,22 @@ function identificarGrupo(id){
     idUnirGrupo = id;
     alert(idUnirGrupo);
 }
-function actionReadUnionGrupoMateria(){
-    // $.ajax({
-    //     method: "POST",
-    //     url: "../../TODO/phppropios/crud-gruposAdmin.php",
-    //     data: {
-    //         accion: "readUnionGrupoMateria"
-    //     },
-    //     success: function(respuesta) {       
-    //         let miObjetoJSON = JSON.parse(respuesta);            
-    //         if(miObjetoJSON.estado==1){            
-    //             let tabla = $("#materiasAgregadas").DataTable();
-    //             miObjetoJSON.grupos.forEach(grupo => {
-    //                 let boton = '<button type="button" class="btn btn-warning btn-sm mr-3" data-toggle="modal" data-target="#modalEditarTutor"><i class=" mdi mdi-pencil mr-1"></i>Eliminar</button>';                                        
-    //                 tabla.row.add([grupo.grupo, grupo.materia, boton]).draw().node().id="renglon_"+grupo.idUnion;                    
-    //             });
-    //         }         
-    //     }
-    //   });
-      $.ajax({
-        method: "POST",
-        url: "../../TODO/phppropios/crud-gruposAdmin.php",
-        data: {
-          accion: "readUnionGrupoMateria"
-        },
-        success: function( respuesta ) {            
-          let miObjetoJSON = JSON.parse(respuesta);
-            if(miObjetoJSON.estado==1){
-                let tabla = $("#materiasAgregadas").DataTable();
-                miObjetoJSON.unionGrupoMateria.forEach( GrupoMateria => {
-                    let botones = '<button type="button" class="btn btn-danger mr-3 btn-sm" data-toggle="modal"><i class=" mdi mdi-trash-can mr-1"></i>Eliminar</button>';
-                    tabla.row.add([GrupoMateria.grupo, GrupoMateria.materia, botones]).draw().node().id="renglon_"+GrupoMateria.idUnion;
-                })
-            }
-        }
-      });  
-}
+// function actionReadUnionGrupoMateria(){
+//       $.ajax({
+//         method: "POST",
+//         url: "../../TODO/phppropios/crud-gruposAdmin.php",
+//         data: {
+//           accion: "readUnionGrupoMateria"
+//         },
+//         success: function( respuesta ) {            
+//           let miObjetoJSON = JSON.parse(respuesta);
+//             if(miObjetoJSON.estado==1){
+//                 let tabla = $("#materiasAgregadas").DataTable();
+//                 miObjetoJSON.unionGrupoMateria.forEach( GrupoMateria => {
+//                     let botones = '<button type="button" class="btn btn-danger mr-3 btn-sm" data-toggle="modal"><i class=" mdi mdi-trash-can mr-1"></i>Eliminar</button>';
+//                     tabla.row.add([GrupoMateria.grupo, GrupoMateria.materia, botones]).draw().node().id="renglon_"+GrupoMateria.idUnion;
+//                 })
+//             }
+//         }
+//       });  
+// }

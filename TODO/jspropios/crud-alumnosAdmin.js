@@ -1,4 +1,5 @@
 let idEliminarAlumno = 0;
+let idActualizarAlumno = 0;
 let idAlumnoUnir = 0;
 function actionCreateAlumno(){
     let nombreAlumno    = document.getElementById("nombreAlumno").value;
@@ -32,7 +33,7 @@ function actionCreateAlumno(){
             if(miObjetoJSON.estado == 1){
                 //agregamos el registro a la tabla
                 let tabla = $("#alumnos").DataTable();
-                let botones = '<button type="button" class="btn btn-warning btn-sm mr-3" data-toggle="modal" data-target="#editarAlumno"><i class=" mdi mdi-pencil mr-1"></i>Editar</button>';
+                let botones = '<button type="button" class="btn btn-warning btn-sm mr-3" data-toggle="modal" data-target="#editarAlumno" onclick="identificarActualizarAlumno('+miObjetoJSON.id+');"><i class=" mdi mdi-pencil mr-1"></i>Editar</button>';
                     botones += '<button type="button" class="btn btn-danger mr-3 btn-sm" data-toggle="modal" data-target="#modalEliminarAlumno" onclick="identificarEliminarAlumno('+miObjetoJSON.id+')"><i class=" mdi mdi-trash-can mr-1"></i>Eliminar</button>';
                     botones += '<button type="button" class="btn btn-primary mr-3 btn-sm" data-toggle="modal" data-target="#asignarGrupo"><i class=" mdi mdi-account-multiple-plus mr-1"></i>Asignar Grupo</button>';
                     if(nivelAcademicoAlumno == 1){
@@ -57,7 +58,7 @@ function actionReadAlumno(){
             if(miObjetoJSON.estado==1){
                 let tabla = $("#alumnos").DataTable();
                 miObjetoJSON.alumnos.forEach(Nombre => {
-                    let botones = '<button type="button" class="btn btn-warning btn-sm mr-3" data-toggle="modal" data-target="#editarAlumno"><i class=" mdi mdi-pencil mr-1"></i>Editar</button>';
+                    let botones = '<button type="button" class="btn btn-warning btn-sm mr-3" data-toggle="modal" data-target="#editarAlumno" onclick="identificarActualizarAlumno('+Nombre.idAlumno+');"><i class=" mdi mdi-pencil mr-1"></i>Editar</button>';
                     botones += '<button type="button" class="btn btn-danger mr-3 btn-sm" data-toggle="modal" data-target="#modalEliminarAlumno" onclick="identificarEliminarAlumno('+Nombre.idAlumno+');"><i class=" mdi mdi-trash-can mr-1"></i>Eliminar</button>';
                     botones += '<button type="button" class="btn btn-primary mr-3 btn-sm" data-toggle="modal" data-target="#asignarGrupo"><i class=" mdi mdi-account-multiple-plus mr-1"></i>Asignar Grupo</button>';
                     if(Nombre.NivelAcademico == 1){
@@ -71,6 +72,7 @@ function actionReadAlumno(){
         }
       });
 }
+
 function actionDeleteAlumno(){
     $.ajax({
         method: "POST",
@@ -92,6 +94,29 @@ function identificarEliminarAlumno(id){
     idEliminarAlumno = id;
     //alert(id);
 }
+function identificarActualizarAlumno(id){
+    alert("HOLA");
+    alert(id);
+    //Realizar solicitud al servidor para que regrese los datos
+    $.ajax({
+        method: "POST",
+        url: "../../TODO/phppropios/crud-alumnosAdmin.php",
+        data: {
+          id: idActualizarAlumno,
+          accion: "read-id"
+        },
+        success: function(respuesta) {
+            alert(respuesta);
+            let miObjetoJSON = JSON.parse(respuesta);
+            if(miObjetoJSON.estado==1){
+                //Mostrar en la ventana de Actualizar los datos recuperados del servidor
+                let nombreAlumnoActualizar   = document.getElementById('nombres-alumno-actualizar');
+                nombreAlumnoActualizar.value = miObjetoJSON.Nombre;        
+              }
+        }
+      });
+}
+
 ////////////////////////////////////////////
 // function actionReadAlumnosAgregar(){
 //     $.ajax({

@@ -102,6 +102,33 @@
         echo json_encode($respuesta);
         mysqli_close($conexion);
     }
+    function accionReadByIdPhp($conexion){
+        $id = $_POST["id"];
+        $QueryReadById ="SELECT * FROM alumno WHERE idAlumno=".$id;
+        $ResultadoReadById = mysqli_query($conexion,$QueryReadById);
+        $numeroRegistros   = mysqli_num_rows($ResultadoReadById);
+        if($numeroRegistros>0){
+            $Respuesta["estado"]       = 1;
+            $Respuesta["mensaje"]      = "Registro Encontrado";
+
+            $RenglonAlumnoById          = mysqli_fetch_assoc($ResultadoReadById);
+
+            $Respuesta["idAlumno"]                  = $RenglonAlumnoById["idAlumno"];
+            $Respuesta["Nombre"]                    = $RenglonAlumnoById["Nombre"];
+            $Respuesta["Ap_Paterno"]                = $RenglonAlumnoById["Ap_Paterno"];
+            $Respuesta["Ap_Materno"]                = $RenglonAlumnoById["Ap_Materno"];
+            $Respuesta["fechaNac"]                  = $RenglonAlumnoById["fechaNac"];
+            $Respuesta["CURP"]                      = $RenglonAlumnoById["CURP"];
+            $Respuesta["NivelAcademico"]            = $RenglonAlumnoById["NivelAcademico"];
+            
+        }else{
+            $Respuesta["estado"]  = 0;
+            $Respuesta["mensaje"] = "Registro no Encontrado";
+        }
+        echo json_encode($Respuesta);
+        mysqli_close($conexion);
+
+    }
     ///////////////////////////////////////////////////////////////////////////////////////////
     // function accionReadAlumnosAgregar($conexion){
     //     // Diseñamos la consulta 

@@ -189,8 +189,8 @@
                       <i class=" mdi mdi-plus mr-1"></i>
                       Nuevo grupo 
                     </button>
-                    <a href="../../TODO/phppropios/uniones2.php">Unir Alumno a Grupo.</a>
-                    <a href="../../TODO/phppropios/uniones3.php">Unir Materia a Grupo.</a>
+                    <button type="button" class="mb-1 btn btn-primary d-inline-block mr-8" role="link" onclick="window.location='../../TODO/phppropios/uniones2.php'">Unir Alumno a Grupo</button>
+                    <button type="button" class="mb-1 btn btn-primary d-inline-block mr-8" role="link" onclick="window.location='../../TODO/phppropios/uniones3.php'">Unir Materia a Grupo</button>                                                            
                     <!-- Buscador que no funciona -->
                     <!-- ====================================
                     ——— <input type="text" class="form-control col-4 d-inline-block" aria-label="Text input with dropdown button" placeholder="Buscar grupo...">
@@ -212,8 +212,15 @@
                   <tbody>                    
                   </tbody>
                 </table>
-                <h3 class="mb-3">Materias Agregadas:</h3>
-                <table id="materiasAgregadas" class="table  table-product" style="width:100%">
+                <!-- Buscador que no funciona -->
+                    <!-- ====================================
+                    ——— <input type="text" class="form-control col-4 d-inline-block" aria-label="Text input with dropdown button" placeholder="Buscar grupo...">
+                    ——— <button type="button" class="mb-1 btn btn-primary ">
+                    ——— <i class=" mdi mdi-magnify mr-1"></i>
+                    ——— </button>
+                    ===================================== -->
+                
+                <!-- <table id="materiasAgregadas" class="table  table-product" style="width:100%">
                   <thead>
                     <tr>
                       <th>Grupo</th>
@@ -223,7 +230,7 @@
                   </thead>
                   <tbody>            
                   </tbody>
-                </table>
+                </table> -->
               </div>
             </div>
           </div>
@@ -554,12 +561,12 @@
                         actionRead();
                       });                    
                     </script>
-                    <script> 
+                    <!-- <script> 
                       $(function(){
                         $("#grupos").DataTable({});
                         actionReadUnionGrupoMateria();
                       });                    
-                    </script>                     
+                    </script>                      -->
                     
                     <script src="../../TODO/jspropios/crud-gruposAdmin.js"></script>
 
