@@ -1,5 +1,5 @@
 <?php
-include '../../TODO/conexion.php';
+include '../../TODO/conexion.php'; // Union Grupo - Alumno
 //$value['idTutor'].$value['Nombre'].$value['Ap_Paterno'].$value['Ap_Materno'];
 //"><?= $value['idTutor'].$value['Nombre'].$value['Ap_Paterno'].$value['Ap_Materno'];
     //$selectTutor    = "SELECT CONCAT(Nombre, ' ',Ap_Paterno, ' ',Ap_Materno) AS nombreTutor FROM tutor";   

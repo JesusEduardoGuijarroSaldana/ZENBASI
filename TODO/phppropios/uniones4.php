@@ -1,29 +1,21 @@
 <?php
-include '../../TODO/conexion.php'; // Union Tutor - Alumno
-//$value['idTutor'].$value['Nombre'].$value['Ap_Paterno'].$value['Ap_Materno'];
-//"><?= $value['idTutor'].$value['Nombre'].$value['Ap_Paterno'].$value['Ap_Materno'];
-    //$selectTutor    = "SELECT CONCAT(Nombre, ' ',Ap_Paterno, ' ',Ap_Materno) AS nombreTutor FROM tutor";
-    $selectTutor    = "SELECT * FROM tutor";
-    $resultTutor    = mysqli_query($conexion, $selectTutor);
-    $selectAlumno   = "SELECT * FROM alumno";
-    //$selectAlumno   = "SELECT CONCAT(Nombre, ' ',Ap_Paterno, ' ',Ap_Materno) AS nombreAlumno FROM alumno";
-    $resultAlumno   = mysqli_query($conexion, $selectAlumno);
-
+include '../../TODO/conexion.php'; // Union Docente - Materia
+    $selectDocente  = "SELECT * FROM docente";
+    $resultDocente  = mysqli_query($conexion, $selectDocente);
+    $selectMateria  = "SELECT * FROM materia";
+    $resultMateria  = mysqli_query($conexion, $selectMateria);
     $message = '';
-    if(isset($_POST['submit'])){
-        $tutor  = $_POST['tutor'];
-        //$idTutor = "SELECT idTutor FROM tutor WHERE idTutor=".$tutor;
-        $alumno = $_POST['alumno'];
-        //$idAlumno = "SELECT idAlumno FROM alumno WHERE CONCAT(Nombre,' ',Ap_Paterno,' ',Ap_Materno)=".$alumno;
-        // Attempt insert query execution
-        $insert = "INSERT INTO tutor_alumno (Tutor_idTutor ,Alumno_idAlumno) VALUES ('$tutor', '$alumno')";
+    if(isset($_POST['submit'])){ 
+        $docente = $_POST['docente'];      
+        $materia = $_POST['materia'];
+        $insert = "UPDATE materia SET Docente_idDocente='$docente' WHERE idMateria=".$materia;
         if(mysqli_query($conexion, $insert)){
             $message = "Records added successfully.";
         }else
             $message = "ERROR: Could not able to execute $insert. " . mysqli_error($conexion);
         // Close connection
         mysqli_close($conexion);
-    }    
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,33 +33,33 @@ include '../../TODO/conexion.php'; // Union Tutor - Alumno
   
     <div class="container-fluid h-100 bg-light text-dark">
         <div class="row justify-content-center align-items-center">
-            <h1>Union Tutor y Alumno</h1>    
+            <h1>Union Docente y Materia</h1>    
         </div>
         <hr/>
         <div class="row justify-content-center align-items-center h-100">
             <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
                 <h5 class="text-success text-center" id="message"><?= $message; ?><h5>
-                <form action="uniones.php" method="POST">                
+                <form action="uniones4.php" method="POST">                
                 <div class="form-group">
-                    <select class="form-control" name="tutor">
-                        <option>Seleccione un Tutor</option>
-                        <?php foreach($resultTutor as $key => $value){ ?>
-                          <option value="<?=  $value['idTutor'];?>"><?= $value['Nombre']." ".$value['Ap_Paterno']." ".$value['Ap_Materno']; ?></option>                           
+                    <select class="form-control" name="materia">
+                        <option>Seleccione una Materia</option>
+                        <?php foreach($resultMateria as $key => $value){ ?>
+                            <option value="<?=  $value['idMateria'];?>"><?= $value['Nombre']." - "."Nivel Academico: ".$value['NivelAcademico']." - Grado: ".$value['Grado']; ?></option> 
                         <?php } ?>
                     </select>
-                    <select class="form-control" name="alumno">
-                        <option>Seleccione un Alumno</option>
-                        <?php foreach($resultAlumno as $key => $value){ ?>
-                          <option value="<?= $value['idAlumno'];?>"><?= $value['Nombre']." ".$value['Ap_Paterno']." ".$value['Ap_Materno']; ?></option> 
+                    <select class="form-control" name="docente">
+                        <option>Seleccione un Docente</option>
+                        <?php foreach($resultDocente as $key => $value){ ?>
+                          <option value="<?=  $value['idDocente'];?>"><?= $value['Nombre']." ".$value['Ap_Paterno']." ".$value['Ap_Materno']; ?></option>                           
                         <?php } ?>
-                    </select>
+                    </select>                    
                 </div>
                 <div class="form-group">
                 <div class="container">
                   <div class="row">
                     <div class="col"><button type="submit" name="submit" class="col-6 btn btn-primary btn-sm float-left">Submit</button></div>
                     <div class="col">                        
-                        <a class="col-6 float-right" href="../../TODO/ADMIN/tutoresAdmin.html">Volver</a>                
+                        <a class="col-6 float-right" href="../../TODO/ADMIN/docentesAdmin.html">Volver</a>                
                   </div>                    
               </form>
                   </div>
